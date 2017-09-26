@@ -16,9 +16,10 @@ let query = function( sql, values ) {
       if (err) {
         resolve( err )
       } else {
-        connection.query(sql, values, ( err, rows) => {
+        let query = connection.query(sql, values, ( err, rows) => {
 
           if ( err ) {
+            console.log(query.sql)
             reject( err )
           } else {
             resolve( rows )

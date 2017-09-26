@@ -20,9 +20,10 @@ const user = {
   async getExistOne(options ) {
     let _sql = `
     SELECT * from user_info
-      where email="${options.email}" or name="${options.name}"
+      where email = ? or name = ?
       limit 1`
-    let result = await dbUtils.query( _sql )
+    let values = [options.email, options.name]
+    let result = await dbUtils.query( _sql, values )
     if ( Array.isArray(result) && result.length > 0 ) {
       result = result[0]
     } else {
@@ -39,9 +40,10 @@ const user = {
   async getOneByUserNameAndPassword( options ) {
     let _sql = `
     SELECT * from user_info
-      where password="${options.password}" and name="${options.name}"
+      where password = ? and name = ?
       limit 1`
-    let result = await dbUtils.query( _sql )
+    let values = [options.password, options.name]
+    let result = await dbUtils.query( _sql, values )
     if ( Array.isArray(result) && result.length > 0 ) {
       result = result[0]
     } else {
